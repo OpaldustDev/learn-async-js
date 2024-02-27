@@ -1,1 +1,19 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+This script defines a function sum2DArray(arr) that returns a Promise. This Promise resolves with the sum of all elements in the given 2D array if the input is a valid 2D array, and rejects with an error message otherwise.
+Here's the order of execution and the messages logged:
+1. When sum2DArray(array2D) is called, the first thing logged is 'Sum called ... ', since it's the first log message in the function.
+2. Then 'returning from sum' is logged, as it is the last operation in the function.
+3. Since the provided input is valid, the function employs a setTimeout() with a 0ms delay to asynchronously calculate the sum of the array elements. Due to JavaScript's event loop and the nature of setTimeout(), this operation is pushed to the queue and the script continues to the next sum2DArray call before this has completed.
+4. "resolving ... " is logged when ready to resolve; the execution of this is deferred due to the setTimeout.
+5. The sum is then logged in the .then() clause of the Promise.
+6. For sum2DArray('array2D'), the same sequence repeats, but now since the input is a string (not a 2D array), 'rejecting ... ' will be logged, and then an error message will be logged in the .catch() clause of the Promise, as the Promise is rejected.
+So, likely the order of console statements will be:
+Sum called ... 
+returning from sum
+Sum called ... 
+returning from sum
+rejecting ... 
+Bad input: Expected array as input
+resolving ... 
+45

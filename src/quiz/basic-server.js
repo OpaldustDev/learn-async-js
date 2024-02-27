@@ -32,7 +32,6 @@ const server = http.createServer((req, res) => {
     // Parse the request URL to extract parameters
     const parsedUrl = url.parse(req.url, true);
     const { pathname } = parsedUrl;
-
     // Check if the request is for the specified endpoint
     if (pathname.startsWith('/incidents/')) {
         // Extract parameters from the URL
@@ -48,10 +47,6 @@ const server = http.createServer((req, res) => {
             // If some parameters are not provided send back a Bad Request response
             res.writeHead(400, { 'Content-Type': 'text/plain' });
             res.end('Bad Request');
-        }
-        else {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Endpoint not found');
         }
     } else {
         // If the request is for an unsupported endpoint, send a not found response
